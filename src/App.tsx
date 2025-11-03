@@ -34,7 +34,10 @@ function App() {
         active={active}
         setActive={(bool) => setActive(bool)}
       ></ControlButton>
-      <DisplayText text={wordsList} indexCurrentWord={wordsIndex}></DisplayText>
+      <DisplayText
+        wordsList={wordsList}
+        indexCurrentWord={wordsIndex}
+      ></DisplayText>
       <InputWord isCorrectWord={onInputWord}></InputWord>
       <Timer
         setTypingTime={(newTime) => setTypingTime(newTime)}
