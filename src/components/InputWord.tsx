@@ -10,7 +10,7 @@ function InputWord({ isCorrectWord }: IWord) {
     if (word[word.length - 1] != " ") {
       return;
     }
-    const reset = isCorrectWord(word.trim());
+    const reset = isCorrectWord(word);
     if (reset) {
       e.target.value = "";
     }

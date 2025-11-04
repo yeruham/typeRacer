@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import DisplayText from "./DisplayText";
 import InputWord from "./InputWord";
 import Timer from "./Timer";
+import ResultsRacer from "./ResultsRacer";
 
 interface Iracer {
-//   activeRacer: boolean;
-//   setActiveRacer: (bool: boolean) => void
   wordsList: string[];
   onFinishRacer: (time: number) => void
 }
@@ -13,6 +12,7 @@ interface Iracer {
 function Racer({ wordsList, onFinishRacer }: Iracer) {
   const [wordsIndex, setWordsIndex] = useState(0);
   const [active, setActive] = useState(true);
+//   const [typingTime, setTypingTime] = useState(0);
 
   useEffect(() => {
     if (wordsIndex == wordsList.length) {
@@ -29,6 +29,10 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
     }
   };
 
+  const finishRacer = (time: number) => {
+    onFinishRacer(time);
+  }
+
   return (
     <>
       <DisplayText
@@ -36,7 +40,7 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
         indexCurrentWord={wordsIndex}
       ></DisplayText>
       <InputWord isCorrectWord={(word) => onInputWord(word)}></InputWord>
-      <Timer active={active} onFinishTimer={onFinishRacer}></Timer>
+      <Timer active={active} onFinishTimer={(time) => finishRacer(time)}></Timer>
     </>
   );
 }

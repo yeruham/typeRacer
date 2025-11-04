@@ -1,13 +1,37 @@
-interface Iactive {
-  active: boolean;
-  setActive: (bool: boolean) => void;
+import { useEffect, useRef, useState } from "react";
+import Racer from "./Racer";
+import ResultsRacer from "./ResultsRacer";
+import StartRacer from "./StartRacer";
+
+function ControlRacer() {
+  const textList = ["a day in the park was", "my name is yeruham", "i am 21 years old"];
+  const textIndex = useRef(0);
+  const wordsList = textList[textIndex.current].split(" ");
+  const [activeRecer, setActiveRecer] = useState(false);
+  const typingTime = useRef(0);
+
+  const startRacer = () => {
+    setActiveRecer(true)
+  }
+
+  const finishRacer = (time: number) => {
+    textIndex.current += 1;
+    typingTime.current = time;
+    setActiveRecer(false);
+  }
+
+  return (
+    <>
+    <StartRacer onClick={startRacer}></StartRacer>
+    { activeRecer ? <Racer wordsList={wordsList} onFinishRacer={(time) => finishRacer(time)}></Racer> : null}
+          {!activeRecer ? (
+        <ResultsRacer
+          time={typingTime.current}
+          numWords={wordsList.length}
+        ></ResultsRacer>
+      ) : null}
+    </>
+  );
 }
 
-function ControlButton({ active, setActive }: Iactive) {
-  const startMessage = "start racer";
-  const stopMessage = "stop racer";
-  let message = active ? stopMessage : startMessage;
-  return <button onClick={() => setActive(!active)}>{message}</button>;
-}
-
-export default ControlButton;
+export default ControlRacer;
