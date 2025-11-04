@@ -46,9 +46,9 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
         active={active}
         onFinishTimer={(time) => finishRacer(time)}
       ></Timer>
-      {!correctWord ? (
+      {!correctWord && (
         <WrongWord word="" correctWord={wordsList[wordsIndex]}></WrongWord>
-      ) : null}
+      ) }
     </>
   );
 }

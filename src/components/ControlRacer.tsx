@@ -2,7 +2,9 @@ import { useRef, useState } from "react";
 import Racer from "./Racer";
 import ResultsRacer from "./ResultsRacer";
 import StartRacer from "./StartRacer";
-import type { Result } from "./RecordsFromLocalStorage";
+import type { Result } from "../interfaces/Result";
+import { saveResult } from "../utils/resultsStorage";
+import { numWordsByMinutes } from "../utils/time";
 
 function ControlRacer() {
   const textList = [
@@ -22,20 +24,9 @@ function ControlRacer() {
   const finishRacer = (time: number) => {
     textIndex.current += 1;
     typingTime.current = time;
-    const result: Result = {time: time, numWords: textIndex.current};
-    saveInLocalStorage("racerRecords", result);
+    saveResult("racerRecords",  time, wordsList.length);
     setActiveRecer(false);
   };
-
-  const saveInLocalStorage = (key: string, result : Result) => {
-    const results = localStorage.getItem(key);
-    let recordsList: {time: number, numWords: number}[] = [];
-    if (results != null){
-        recordsList = JSON.parse(results);
-    }
-      recordsList.push(result);
-      localStorage.setItem(key, JSON.stringify(recordsList));
-  }
 
   return (
     <>
@@ -46,12 +37,12 @@ function ControlRacer() {
           onFinishRacer={(time) => finishRacer(time)}
         ></Racer>
       ) : null}
-      {!activeRecer  && typingTime.current > 0 ? (
+      {!activeRecer && typingTime.current > 0 ? (
         <ResultsRacer
           time={typingTime.current}
           numWords={wordsList.length}
         ></ResultsRacer>
-      ): null}
+      ) : null}
     </>
   );
 }

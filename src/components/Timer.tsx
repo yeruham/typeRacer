@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ShowTime from "./showTime";
+import { showTime }from "../utils/time";
 
 interface ITimer {
   active: boolean;
-  onFinishTimer: (time: number) => void
+  onFinishTimer: (time: number) => void;
 }
 
 function Timer({ active, onFinishTimer }: ITimer) {
@@ -15,13 +15,12 @@ function Timer({ active, onFinishTimer }: ITimer) {
         setTime((time) => time + 1);
       }, 1000);
       return () => clearInterval(interval);
-    }
-    else{
-        onFinishTimer(time);
+    } else {
+      onFinishTimer(time);
     }
   }, [active]);
 
-  return <ShowTime secondsTime={time}></ShowTime>;
+  return <button>{showTime(time)}</button>;
 }
 
 export default Timer;

@@ -1,22 +1,16 @@
-export interface Result{
-  time: number,
-  numWords: number
-}
+import type { Result } from "../interfaces/Result";
+import { numWordsByMinutes } from "../utils/time";
 
-
-function RecordsFromLocalStorage({localStorageKey, numRecords}: {localStorageKey: string, numRecords: number}) {
-  const records = localStorage.getItem(localStorageKey);
-  if (records == null) {
-    return;
-  }
-  const recordsList: Result[] = JSON.parse(records);
-  recordsList.sort((a, b) => a.time - b.time);
+function RecordsFromLocalStorage({ records }: { records: Result[] }) {
   return (
     <div id="records">
       <h3>records</h3>
-      <p>num words by minutes:</p>
-      {recordsList.slice(0, numRecords).map((record, index) => {
-        return <p key={index}>time: {record.time} numWords: {record.numWords}</p>;
+      {records.map((record, index) => {
+        return (
+          <p key={index}>
+            time: {record.time} num words: {record.numWords} wordes by minutes: {record.wordsByMinutes}
+          </p>
+        );
       })}
     </div>
   );

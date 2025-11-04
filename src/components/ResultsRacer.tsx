@@ -1,16 +1,12 @@
-import ShowTime from "./showTime";
+import { showTime, numWordsByMinutes } from "../utils/time";
 
 function ResultsRacer({ time, numWords }: { time: number; numWords: number }) {
-  const numWordsByMinutes = () => {
-    console.log(numWords);
-    const minutes = time / 60;
-    return (numWords / minutes).toFixed();
-  };
-
   return (
     <>
-      <p>num words by minutes: {time > 0 ? numWordsByMinutes() : 0}</p>
-      <ShowTime secondsTime={time}></ShowTime>
+      <p>
+        num words by minutes: {time > 0 ? numWordsByMinutes(time, numWords) : 0}
+      </p>
+      <button>{showTime(time)}</button>
     </>
   );
 }
