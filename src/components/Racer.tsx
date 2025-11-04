@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import DisplayText from "./DisplayText";
 import InputWord from "./InputWord";
 import Timer from "./Timer";
-import ResultsRacer from "./ResultsRacer";
+import WrongWord from "./WrongWord";
 
 interface Iracer {
   wordsList: string[];
-  onFinishRacer: (time: number) => void
+  onFinishRacer: (time: number) => void;
 }
 
 function Racer({ wordsList, onFinishRacer }: Iracer) {
   const [wordsIndex, setWordsIndex] = useState(0);
   const [active, setActive] = useState(true);
-//   const [typingTime, setTypingTime] = useState(0);
+  const [correctWord, setCorrectWord] = useState(true);
 
   useEffect(() => {
     if (wordsIndex == wordsList.length) {
@@ -23,15 +23,17 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
   const onInputWord = (inputWord: string): boolean => {
     if (inputWord.trim() == wordsList[wordsIndex]) {
       setWordsIndex((i) => i + 1);
+      setCorrectWord(true);
       return true;
     } else {
+      setCorrectWord(false);
       return false;
     }
   };
 
   const finishRacer = (time: number) => {
     onFinishRacer(time);
-  }
+  };
 
   return (
     <>
@@ -40,7 +42,13 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
         indexCurrentWord={wordsIndex}
       ></DisplayText>
       <InputWord isCorrectWord={(word) => onInputWord(word)}></InputWord>
-      <Timer active={active} onFinishTimer={(time) => finishRacer(time)}></Timer>
+      <Timer
+        active={active}
+        onFinishTimer={(time) => finishRacer(time)}
+      ></Timer>
+      {!correctWord ? (
+        <WrongWord word="" correctWord={wordsList[wordsIndex]}></WrongWord>
+      ) : null}
     </>
   );
 }

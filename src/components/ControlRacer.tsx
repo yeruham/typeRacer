@@ -1,35 +1,44 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Racer from "./Racer";
 import ResultsRacer from "./ResultsRacer";
 import StartRacer from "./StartRacer";
 
 function ControlRacer() {
-  const textList = ["a day in the park was", "my name is yeruham", "i am 21 years old"];
+  const textList = [
+    "a day in the park was",
+    "my name is yeruham",
+    "i am 21 years old",
+  ];
   const textIndex = useRef(0);
   const wordsList = textList[textIndex.current].split(" ");
   const [activeRecer, setActiveRecer] = useState(false);
   const typingTime = useRef(0);
 
   const startRacer = () => {
-    setActiveRecer(true)
-  }
+    setActiveRecer(true);
+  };
 
   const finishRacer = (time: number) => {
     textIndex.current += 1;
     typingTime.current = time;
     setActiveRecer(false);
-  }
+  };
 
   return (
     <>
-    <StartRacer onClick={startRacer}></StartRacer>
-    { activeRecer ? <Racer wordsList={wordsList} onFinishRacer={(time) => finishRacer(time)}></Racer> : null}
-          {!activeRecer ? (
+      <StartRacer onClick={startRacer}></StartRacer>
+      {activeRecer ? (
+        <Racer
+          wordsList={wordsList}
+          onFinishRacer={(time) => finishRacer(time)}
+        ></Racer>
+      ) : null}
+      {!activeRecer  && typingTime.current > 0 ? (
         <ResultsRacer
           time={typingTime.current}
           numWords={wordsList.length}
         ></ResultsRacer>
-      ) : null}
+      ): null}
     </>
   );
 }

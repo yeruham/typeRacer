@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import Title from "./components/Title";
 import ControlRacer from "./components/ControlRacer";
 

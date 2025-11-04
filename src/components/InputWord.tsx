@@ -1,5 +1,3 @@
-import { useRef, useState } from "react";
-
 interface IWord {
   isCorrectWord: (word: string) => boolean;
 }

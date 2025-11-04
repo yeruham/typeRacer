@@ -1,10 +1,9 @@
-function DisplayText({
-  wordsList,
-  indexCurrentWord,
-}: {
+interface IDisplayText {
   wordsList: string[];
   indexCurrentWord: number;
-}) {
+}
+
+function DisplayText({ wordsList, indexCurrentWord }: IDisplayText) {
   return (
     <div id="display-text">
       <h3>Type the following text:</h3>
