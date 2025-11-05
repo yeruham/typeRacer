@@ -7,16 +7,15 @@ export function getRecords(key: string, numRecords: number): Result[] | null {
     return null;
   }
   const recordsList: Result[] = JSON.parse(records);
-  recordsList.forEach((element) => {
-    if (!element.wordsByMinutes) {
-    }
-  });
+  // recordsList.forEach((element) => {
+  //   if (!element.wordsByMinutes) {
+  //   }
+  // });
   recordsList.sort((a, b) => b.wordsByMinutes - a.wordsByMinutes);
   return recordsList.slice(0, numRecords);
 }
 
-export function saveResult(key: string, time: number, numWords: number): void {
-  const currentResult = buildResult(time, numWords);
+export function saveResult(key: string, currentResult: Result): void {
   const results = localStorage.getItem(key);
   let recordsList: { time: number; numWords: number }[] = [];
   if (results != null) {
@@ -26,7 +25,7 @@ export function saveResult(key: string, time: number, numWords: number): void {
   localStorage.setItem(key, JSON.stringify(recordsList));
 }
 
-function buildResult(time: number, numWords: number): Result {
+export function buildResult(time: number, numWords: number): Result {
   const wordsByMinutes = numWordsByMinutes(time, numWords);
   const result = {
     time: time,

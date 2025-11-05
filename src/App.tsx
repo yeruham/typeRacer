@@ -1,17 +1,22 @@
 import Title from "./components/Title";
 import ControlRacer from "./components/ControlRacer";
 import RecordsFromLocalStorage from "./components/RecordsFromLocalStorage";
-import { getRecords } from "./utils/resultsStorage";
-import { useEffect } from "react";
+import { getRecords, saveResult } from "./utils/resultsStorage";
+import { useEffect, useState } from "react";
+import type { Result } from "./interfaces/Result";
 
 function App() {
   const localStorageKey = "racerRecords";
   const numShowRecords = 5;
-  let records = getRecords(localStorageKey, numShowRecords);
+  const [records, setRecords] = useState(
+    getRecords(localStorageKey, numShowRecords)
+  );
 
-  useEffect(() => {
-    records = getRecords(localStorageKey, numShowRecords);
-  }, []);
+  const updateRecords = (newResult: Result) => {
+    saveResult(localStorageKey, newResult);
+    const updatedRecords = getRecords(localStorageKey, numShowRecords);
+    setRecords(updatedRecords);
+  };
 
   return (
     <>
@@ -19,7 +24,9 @@ function App() {
       {records && (
         <RecordsFromLocalStorage records={records}></RecordsFromLocalStorage>
       )}
-      <ControlRacer></ControlRacer>
+      <ControlRacer
+        updateResult={(result) => updateRecords(result)}
+      ></ControlRacer>
     </>
   );
 }

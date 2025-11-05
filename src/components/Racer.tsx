@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import DisplayText from "./DisplayText";
 import InputWord from "./InputWord";
 import Timer from "./Timer";
-import WrongWord from "./WrongWord";
+import WrongInput from "./WrongInput";
+import ResultsRacer from "./ResultsRacer";
 
 interface Iracer {
   wordsList: string[];
@@ -12,7 +13,7 @@ interface Iracer {
 function Racer({ wordsList, onFinishRacer }: Iracer) {
   const [wordsIndex, setWordsIndex] = useState(0);
   const [active, setActive] = useState(true);
-  const [correctWord, setCorrectWord] = useState(true);
+  const [currentInput, setCurrentInput] = useState(wordsList[wordsIndex]);
 
   useEffect(() => {
     if (wordsIndex == wordsList.length) {
@@ -23,10 +24,10 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
   const onInputWord = (inputWord: string): boolean => {
     if (inputWord.trim() == wordsList[wordsIndex]) {
       setWordsIndex((i) => i + 1);
-      setCorrectWord(true);
+      setCurrentInput(wordsList[wordsIndex + 1]);
       return true;
     } else {
-      setCorrectWord(false);
+      setCurrentInput(inputWord);
       return false;
     }
   };
@@ -46,9 +47,12 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
         active={active}
         onFinishTimer={(time) => finishRacer(time)}
       ></Timer>
-      {!correctWord && (
-        <WrongWord word="" correctWord={wordsList[wordsIndex]}></WrongWord>
-      ) }
+      {currentInput != wordsList[wordsIndex] && (
+        <WrongInput
+          wordInput={currentInput}
+          correctWord={wordsList[wordsIndex]}
+        ></WrongInput>
+      )}
     </>
   );
 }

@@ -1,13 +1,13 @@
-import { showTime, numWordsByMinutes } from "../utils/time";
+import { showTime } from "../utils/time";
+import type { Result } from "../interfaces/Result";
 
-function ResultsRacer({ time, numWords }: { time: number; numWords: number }) {
+function ResultsRacer({ result }: { result: Result }) {
   return (
-    <>
-      <p>
-        num words by minutes: {time > 0 ? numWordsByMinutes(time, numWords) : 0}
-      </p>
-      <button>{showTime(time)}</button>
-    </>
+    <div id="result">
+      <h3>result racer:</h3>
+      <p>num words by minutes: {result.wordsByMinutes}</p>
+      <button>{showTime(result.time)}</button>
+    </div>
   );
 }
 

@@ -2,20 +2,21 @@ import { useRef, useState } from "react";
 import Racer from "./Racer";
 import ResultsRacer from "./ResultsRacer";
 import StartRacer from "./StartRacer";
+import { buildResult } from "../utils/resultsStorage";
+import { texts } from "../utils/texst";
 import type { Result } from "../interfaces/Result";
-import { saveResult } from "../utils/resultsStorage";
-import { numWordsByMinutes } from "../utils/time";
 
-function ControlRacer() {
-  const textList = [
-    "a day in the park was",
-    "my name is yeruham",
-    "i am 21 years old",
-  ];
+function ControlRacer({
+  updateResult,
+}: {
+  updateResult: (result: Result) => void;
+}) {
+  const textList: string[] = texts;
   const textIndex = useRef(0);
   const wordsList = textList[textIndex.current].split(" ");
   const [activeRecer, setActiveRecer] = useState(false);
   const typingTime = useRef(0);
+  const currentResult: React.RefObject<null | Result> = useRef(null);
 
   const startRacer = () => {
     setActiveRecer(true);
@@ -24,8 +25,10 @@ function ControlRacer() {
   const finishRacer = (time: number) => {
     textIndex.current += 1;
     typingTime.current = time;
-    saveResult("racerRecords",  time, wordsList.length);
     setActiveRecer(false);
+    const result = buildResult(time, wordsList.length);
+    currentResult.current = result;
+    updateResult(result);
   };
 
   return (
@@ -37,12 +40,11 @@ function ControlRacer() {
           onFinishRacer={(time) => finishRacer(time)}
         ></Racer>
       ) : null}
-      {!activeRecer && typingTime.current > 0 ? (
+      {currentResult.current && (
         <ResultsRacer
-          time={typingTime.current}
-          numWords={wordsList.length}
+          result={currentResult.current}
         ></ResultsRacer>
-      ) : null}
+      )}
     </>
   );
 }
