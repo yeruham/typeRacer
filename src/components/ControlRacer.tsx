@@ -3,7 +3,7 @@ import Racer from "./Racer";
 import ResultsRacer from "./ResultsRacer";
 import StartRacer from "./StartRacer";
 import { buildResult } from "../utils/resultsStorage";
-import { texts } from "../utils/texst";
+import { texts } from "../constants/texst";
 import type { Result } from "../interfaces/Result";
 
 function ControlRacer({
@@ -24,7 +24,7 @@ function ControlRacer({
   };
 
   const finishRacer = (time: number) => {
-    textIndex.current += 1;
+    textIndex.current = (textIndex.current + 1) % wordsList.length;
     typingTime.current = time;
     setActiveRecer(false);
     const result = buildResult(time, wordsList.length);

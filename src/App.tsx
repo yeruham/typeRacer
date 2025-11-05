@@ -1,13 +1,14 @@
 import Title from "./components/Title";
 import ControlRacer from "./components/ControlRacer";
-import RecordsFromLocalStorage from "./components/RecordsFromLocalStorage";
+import ShowRecords from "./components/ShowRecords";
 import { getRecords, saveResult } from "./utils/resultsStorage";
 import { useState } from "react";
 import type { Result } from "./interfaces/Result";
+import { CONFIG } from "./constants/Config";
 
 function App() {
-  const localStorageKey = "racerRecords";
-  const numShowRecords = 5;
+  const localStorageKey = CONFIG.LOCAL_STORAGE_KEY;
+  const numShowRecords = CONFIG.NUM_SHOW_RECORDS;
   const [records, setRecords] = useState(
     getRecords(localStorageKey, numShowRecords)
   );
@@ -20,14 +21,12 @@ function App() {
 
   return (
     <>
-      <Title></Title>
+      <Title />
       <div id="racer-continer">
-      {records && (
-        <RecordsFromLocalStorage records={records}></RecordsFromLocalStorage>
-      )}
-      <ControlRacer
-        updateResult={(result) => updateRecords(result)}
-      ></ControlRacer>
+        {records && <ShowRecords records={records}></ShowRecords>}
+        <ControlRacer
+          updateResult={(result) => updateRecords(result)}
+        ></ControlRacer>
       </div>
     </>
   );

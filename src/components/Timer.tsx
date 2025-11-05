@@ -20,7 +20,7 @@ function Timer({ active, onFinishTimer }: ITimer) {
     }
   }, [active]);
 
-  return <div id="timer">{showTime(time)}</div>;
+  return <div className="timer">{showTime(time)}</div>;
 }
 
 export default Timer;

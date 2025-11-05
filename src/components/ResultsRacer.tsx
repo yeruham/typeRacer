@@ -6,7 +6,7 @@ function ResultsRacer({ result }: { result: Result }) {
     <div id="result">
       <h3>result racer:</h3>
       <p>num words by minutes: {result.wordsByMinutes}</p>
-      <div id="timer">{showTime(result.time)}</div>
+      <div className="timer">{showTime(result.time)}</div>
     </div>
   );
 }

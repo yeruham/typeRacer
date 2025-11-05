@@ -115,7 +115,7 @@ input {
   color: rgb(255, 0, 0);
 }
 
-#timer {
+.timer {
   background-color: rgb(252, 217, 152);
   height: 30px;
   border-radius: 5px;
