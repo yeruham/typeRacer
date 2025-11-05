@@ -36,7 +36,7 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
   };
 
   return (
-    <>
+    <div id="racer">
       <DisplayText
         wordsList={wordsList}
         indexCurrentWord={wordsIndex}
@@ -52,7 +52,7 @@ function Racer({ wordsList, onFinishRacer }: Iracer) {
           correctWord={wordsList[wordsIndex]}
         ></WrongInput>
       )}
-    </>
+    </div>
   );
 }
 

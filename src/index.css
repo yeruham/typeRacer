@@ -12,6 +12,15 @@ h1 {
   margin: 0px;
 }
 
+h3 {
+  margin: 0px;
+}
+
+input {
+  height: 30px;
+  font-size: 18px;
+}
+
 #racer-continer {
   background-color: rgb(180, 197, 250);
   display: flex;
@@ -21,9 +30,8 @@ h1 {
 }
 
 #records,
-#racer {
+#controle-racer {
   background-color: white;
-  /* border: 1px solid white; */
   border-radius: 10px;
   flex: 1;
   margin: 2%;
@@ -36,10 +44,8 @@ h1 {
   gap: 10px;
 }
 
-#racer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#controle-racer {
+  padding: 30px;
 }
 
 #records-title {
@@ -61,4 +67,61 @@ h1 {
   height: 40px;
   font-size: 18px;
   border-radius: 5px;
+}
+
+#start-racer {
+  width: 40%;
+  height: 35px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  border: 2px solid rgb(81, 103, 173);
+  border-radius: 5px;
+  background-color: rgb(81, 103, 173);
+  color: white;
+  cursor: pointer;
+}
+
+#start-racer:hover {
+  opacity: 0.8;
+}
+
+#start-racer:active {
+  background-color: white;
+  color: rgb(81, 103, 173);
+}
+
+#racer,
+#result {
+  background-color: rgb(180, 197, 250);
+  border-radius: 5px;
+  height: 80%;
+  padding-top: 10px;
+}
+
+#display-text {
+  color: white;
+}
+
+#text-to-type {
+  font-size: 18px;
+  background-color: rgb(213, 224, 255);
+  color: black;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 15px;
+}
+
+#current-word {
+  color: rgb(255, 0, 0);
+}
+
+#timer {
+  background-color: rgb(252, 217, 152);
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  margin-left: 42%;
+  margin-right: 42%;
+  margin-top: 10px;
+  padding-top: 10px;
 }

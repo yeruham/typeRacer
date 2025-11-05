@@ -1,6 +1,6 @@
 export const texts: string[] = [
   "I like apples and bananas",
-  "The dog runs in the park q q",
+  "The dog runs in the park",
   "She reads a book at home",
   "He plays football with his friends",
   "We eat breakfast in the kitchen",
@@ -8,6 +8,5 @@ export const texts: string[] = [
   "They watch TV every evening",
   "My cat sleeps on the bed",
   "I drink water when I am thirsty",
-  "The baby laughs and claps his hands"
+  "The baby laughs and claps his hands",
 ];
-
