@@ -21,12 +21,14 @@ function App() {
   return (
     <>
       <Title></Title>
+      <div id="racer-continer">
       {records && (
         <RecordsFromLocalStorage records={records}></RecordsFromLocalStorage>
       )}
       <ControlRacer
         updateResult={(result) => updateRecords(result)}
       ></ControlRacer>
+      </div>
     </>
   );
 }

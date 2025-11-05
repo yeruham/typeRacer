@@ -33,7 +33,7 @@ function ControlRacer({
   };
 
   return (
-    <>
+    <div id="racer">
       <StartRacer onClick={startRacer}></StartRacer>
       {activeRecer ? (
         <Racer
@@ -46,7 +46,7 @@ function ControlRacer({
           result={currentResult.current}
         ></ResultsRacer>
       )}
-    </>
+    </div>
   );
 }
 
