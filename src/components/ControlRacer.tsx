@@ -19,6 +19,7 @@ function ControlRacer({
   const currentResult: React.RefObject<null | Result> = useRef(null);
 
   const startRacer = () => {
+    currentResult.current = null;
     setActiveRecer(true);
   };
 

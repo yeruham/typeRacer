@@ -2,7 +2,7 @@ import Title from "./components/Title";
 import ControlRacer from "./components/ControlRacer";
 import RecordsFromLocalStorage from "./components/RecordsFromLocalStorage";
 import { getRecords, saveResult } from "./utils/resultsStorage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Result } from "./interfaces/Result";
 
 function App() {

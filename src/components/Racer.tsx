@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import DisplayText from "./DisplayText";
 import InputWord from "./InputWord";
 import Timer from "./Timer";
 import WrongInput from "./WrongInput";
-import ResultsRacer from "./ResultsRacer";
 
 interface Iracer {
   wordsList: string[];
