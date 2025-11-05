@@ -24,7 +24,7 @@ function ControlRacer({
   };
 
   const finishRacer = (time: number) => {
-    textIndex.current = (textIndex.current + 1) % wordsList.length;
+    textIndex.current = (textIndex.current + 1) % textList.length;
     typingTime.current = time;
     setActiveRecer(false);
     const result = buildResult(time, wordsList.length);
